@@ -1,16 +1,23 @@
 import uuid
 import collections
 
-from simple_search import parse_csv
+from simple_search import language
 
 
-_DataItem = collections.namedtuple("_DataItem", ["name", "data"])
+class DataItem(object):
 
+    def __init__(self, name, text, tok=None):
+        if tok is None:
+            tok = language.simple_tokenizer
+        self.name = name
+        self.text = text
+        self.tokens = tok(text)
 
-class DataItem(_DataItem):
+    def __iter__(self):
+        return iter([self.name, self.text])
 
     def __contains__(self, keys):
-        return all(key in self.data for key in keys)
+        return all(key in self.tokens for key in keys)
 
     def __repr__(self):
         return "DataItem: -{}-".format(self.name)
