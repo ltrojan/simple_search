@@ -22,4 +22,5 @@ setup(
     packages=[
         "simple_search",
     ],
+    scripts=["scripts/csv_search.py"]
 )
