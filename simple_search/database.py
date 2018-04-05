@@ -1,6 +1,3 @@
-import uuid
-import collections
-
 from simple_search import language
 
 
@@ -17,7 +14,7 @@ class DataItem(object):
         return iter([self.name, self.text])
 
     def __contains__(self, keys):
-        return all(key in self.tokens for key in keys)
+        return any(key in self.tokens for key in keys)
 
     def __repr__(self):
         return "DataItem: -{}-".format(self.name)
